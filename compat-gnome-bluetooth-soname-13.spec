@@ -4,12 +4,13 @@
 #
 Name     : compat-gnome-bluetooth-soname-13
 Version  : 3.34.5
-Release  : 26
+Release  : 27
 URL      : https://download.gnome.org/sources/gnome-bluetooth/3.34/gnome-bluetooth-3.34.5.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-bluetooth/3.34/gnome-bluetooth-3.34.5.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
+Requires: compat-gnome-bluetooth-soname-13-data = %{version}-%{release}
 Requires: compat-gnome-bluetooth-soname-13-lib = %{version}-%{release}
 Requires: compat-gnome-bluetooth-soname-13-license = %{version}-%{release}
 Requires: compat-gnome-bluetooth-soname-13-locales = %{version}-%{release}
@@ -27,9 +28,30 @@ gnome-bluetooth is collection of widgets for applications that want
 to select Bluetooth devices. It is also used by GNOME session
 components such as the Settings and gnome-shell.
 
+%package data
+Summary: data components for the compat-gnome-bluetooth-soname-13 package.
+Group: Data
+
+%description data
+data components for the compat-gnome-bluetooth-soname-13 package.
+
+
+%package dev
+Summary: dev components for the compat-gnome-bluetooth-soname-13 package.
+Group: Development
+Requires: compat-gnome-bluetooth-soname-13-lib = %{version}-%{release}
+Requires: compat-gnome-bluetooth-soname-13-data = %{version}-%{release}
+Provides: compat-gnome-bluetooth-soname-13-devel = %{version}-%{release}
+Requires: compat-gnome-bluetooth-soname-13 = %{version}-%{release}
+
+%description dev
+dev components for the compat-gnome-bluetooth-soname-13 package.
+
+
 %package lib
 Summary: lib components for the compat-gnome-bluetooth-soname-13 package.
 Group: Libraries
+Requires: compat-gnome-bluetooth-soname-13-data = %{version}-%{release}
 Requires: compat-gnome-bluetooth-soname-13-license = %{version}-%{release}
 
 %description lib
@@ -61,7 +83,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1647873237
+export SOURCE_DATE_EPOCH=1647885025
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -88,45 +110,51 @@ DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang gnome-bluetooth2
 ## Remove excluded files
 rm -f %{buildroot}*/usr/bin/bluetooth-sendto
-rm -f %{buildroot}*/usr/include/gnome-bluetooth/bluetooth-chooser-button.h
-rm -f %{buildroot}*/usr/include/gnome-bluetooth/bluetooth-chooser-combo.h
-rm -f %{buildroot}*/usr/include/gnome-bluetooth/bluetooth-chooser.h
-rm -f %{buildroot}*/usr/include/gnome-bluetooth/bluetooth-client.h
-rm -f %{buildroot}*/usr/include/gnome-bluetooth/bluetooth-enums.h
-rm -f %{buildroot}*/usr/include/gnome-bluetooth/bluetooth-filter-widget.h
-rm -f %{buildroot}*/usr/include/gnome-bluetooth/bluetooth-settings-widget.h
-rm -f %{buildroot}*/usr/include/gnome-bluetooth/bluetooth-utils.h
-rm -f %{buildroot}*/usr/lib64/girepository-1.0/GnomeBluetooth-1.0.typelib
-rm -f %{buildroot}*/usr/lib64/libgnome-bluetooth.so
-rm -f %{buildroot}*/usr/lib64/pkgconfig/gnome-bluetooth-1.0.pc
 rm -f %{buildroot}*/usr/share/applications/bluetooth-sendto.desktop
-rm -f %{buildroot}*/usr/share/gir-1.0/GnomeBluetooth-1.0.gir
-rm -f %{buildroot}*/usr/share/gnome-bluetooth/pin-code-database.xml
-rm -f %{buildroot}*/usr/share/icons/hicolor/16x16/apps/bluetooth.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/16x16/status/bluetooth-active.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/16x16/status/bluetooth-disabled.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/16x16/status/bluetooth-paired.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/22x22/apps/bluetooth.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/22x22/status/bluetooth-active.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/22x22/status/bluetooth-disabled.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/22x22/status/bluetooth-paired.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/24x24/apps/bluetooth.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/24x24/status/bluetooth-active.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/24x24/status/bluetooth-disabled.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/24x24/status/bluetooth-paired.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/32x32/apps/bluetooth.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/32x32/status/bluetooth-active.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/32x32/status/bluetooth-disabled.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/32x32/status/bluetooth-paired.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/48x48/apps/bluetooth.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/48x48/status/bluetooth-active.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/48x48/status/bluetooth-disabled.png
-rm -f %{buildroot}*/usr/share/icons/hicolor/scalable/apps/bluetooth.svg
-rm -f %{buildroot}*/usr/share/icons/hicolor/scalable/status/bluetooth-paired.svg
 rm -f %{buildroot}*/usr/share/man/man1/bluetooth-sendto.1
 
 %files
 %defattr(-,root,root,-)
+
+%files data
+%defattr(-,root,root,-)
+/usr/lib64/girepository-1.0/GnomeBluetooth-1.0.typelib
+/usr/share/gir-1.0/*.gir
+/usr/share/gnome-bluetooth/pin-code-database.xml
+/usr/share/icons/hicolor/16x16/apps/bluetooth.png
+/usr/share/icons/hicolor/16x16/status/bluetooth-active.png
+/usr/share/icons/hicolor/16x16/status/bluetooth-disabled.png
+/usr/share/icons/hicolor/16x16/status/bluetooth-paired.png
+/usr/share/icons/hicolor/22x22/apps/bluetooth.png
+/usr/share/icons/hicolor/22x22/status/bluetooth-active.png
+/usr/share/icons/hicolor/22x22/status/bluetooth-disabled.png
+/usr/share/icons/hicolor/22x22/status/bluetooth-paired.png
+/usr/share/icons/hicolor/24x24/apps/bluetooth.png
+/usr/share/icons/hicolor/24x24/status/bluetooth-active.png
+/usr/share/icons/hicolor/24x24/status/bluetooth-disabled.png
+/usr/share/icons/hicolor/24x24/status/bluetooth-paired.png
+/usr/share/icons/hicolor/32x32/apps/bluetooth.png
+/usr/share/icons/hicolor/32x32/status/bluetooth-active.png
+/usr/share/icons/hicolor/32x32/status/bluetooth-disabled.png
+/usr/share/icons/hicolor/32x32/status/bluetooth-paired.png
+/usr/share/icons/hicolor/48x48/apps/bluetooth.png
+/usr/share/icons/hicolor/48x48/status/bluetooth-active.png
+/usr/share/icons/hicolor/48x48/status/bluetooth-disabled.png
+/usr/share/icons/hicolor/scalable/apps/bluetooth.svg
+/usr/share/icons/hicolor/scalable/status/bluetooth-paired.svg
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/gnome-bluetooth/bluetooth-chooser-button.h
+/usr/include/gnome-bluetooth/bluetooth-chooser-combo.h
+/usr/include/gnome-bluetooth/bluetooth-chooser.h
+/usr/include/gnome-bluetooth/bluetooth-client.h
+/usr/include/gnome-bluetooth/bluetooth-enums.h
+/usr/include/gnome-bluetooth/bluetooth-filter-widget.h
+/usr/include/gnome-bluetooth/bluetooth-settings-widget.h
+/usr/include/gnome-bluetooth/bluetooth-utils.h
+/usr/lib64/libgnome-bluetooth.so
+/usr/lib64/pkgconfig/gnome-bluetooth-1.0.pc
 
 %files lib
 %defattr(-,root,root,-)
