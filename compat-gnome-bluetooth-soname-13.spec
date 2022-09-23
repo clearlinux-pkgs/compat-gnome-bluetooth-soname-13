@@ -4,7 +4,7 @@
 #
 Name     : compat-gnome-bluetooth-soname-13
 Version  : 3.34.5
-Release  : 28
+Release  : 29
 URL      : https://download.gnome.org/sources/gnome-bluetooth/3.34/gnome-bluetooth-3.34.5.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-bluetooth/3.34/gnome-bluetooth-3.34.5.tar.xz
 Summary  : No detailed summary available
