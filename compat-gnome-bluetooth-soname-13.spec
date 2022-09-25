@@ -4,7 +4,7 @@
 #
 Name     : compat-gnome-bluetooth-soname-13
 Version  : 3.34.5
-Release  : 29
+Release  : 30
 URL      : https://download.gnome.org/sources/gnome-bluetooth/3.34/gnome-bluetooth-3.34.5.tar.xz
 Source0  : https://download.gnome.org/sources/gnome-bluetooth/3.34/gnome-bluetooth-3.34.5.tar.xz
 Summary  : No detailed summary available
@@ -83,7 +83,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1647885025
+export SOURCE_DATE_EPOCH=1664141518
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -104,8 +104,8 @@ meson test -C builddir --print-errorlogs
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/compat-gnome-bluetooth-soname-13
-cp %{_builddir}/gnome-bluetooth-3.34.5/COPYING %{buildroot}/usr/share/package-licenses/compat-gnome-bluetooth-soname-13/b47456e2c1f38c40346ff00db976a2badf36b5e3
-cp %{_builddir}/gnome-bluetooth-3.34.5/COPYING.LIB %{buildroot}/usr/share/package-licenses/compat-gnome-bluetooth-soname-13/545f380fb332eb41236596500913ff8d582e3ead
+cp %{_builddir}/gnome-bluetooth-%{version}/COPYING %{buildroot}/usr/share/package-licenses/compat-gnome-bluetooth-soname-13/b47456e2c1f38c40346ff00db976a2badf36b5e3 || :
+cp %{_builddir}/gnome-bluetooth-%{version}/COPYING.LIB %{buildroot}/usr/share/package-licenses/compat-gnome-bluetooth-soname-13/545f380fb332eb41236596500913ff8d582e3ead || :
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang gnome-bluetooth2
 ## Remove excluded files
